@@ -2,7 +2,7 @@ package com.vh.springregistrationform.controller;
 
 import com.vh.springregistrationform.dto.NoteDTO;
 import com.vh.springregistrationform.entity.Note;
-import com.vh.springregistrationform.service.RegFormService;
+import com.vh.springregistrationform.service.impl.RegFormServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class RegFormController {
 
-    private final RegFormService regFormService;
+    private final RegFormServiceImpl regFormService;
 
     private final ModelMapper mapper;
 
     @Autowired
-    public RegFormController(RegFormService regFormService, ModelMapper mapper) {
+    public RegFormController(RegFormServiceImpl regFormService, ModelMapper mapper) {
         this.regFormService = regFormService;
         this.mapper = mapper;
     }

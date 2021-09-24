@@ -1,11 +1,13 @@
 package com.vh.springregistrationform.service;
 
-import org.springframework.stereotype.Service;
-import com.vh.springregistrationform.dto.NoteDTO;
+import com.vh.springregistrationform.entity.Note;
 
-@Service
-public class RegFormService {
-    public String inputNote(NoteDTO note) {
-        return "";
-    }
+import java.util.List;
+
+public interface RegFormService {
+    void save(Note note);
+
+    Note findByUsername(String username);
+
+    List<Note> findAllNotes();
 }
