@@ -65,10 +65,6 @@
                     <a class="nav-link" href="${contextPath}/welcome"><fmt:message key="welcome" /> <span class="sr-only"></span></a>
                 </li>
             </ul>
-            <%--        <form id="logoutForm" method="POST" action="${contextPath}/logout">--%>
-            <%--            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
-            <%--            <a onclick="document.forms['logoutForm'].submit()">Logout</a>--%>
-            <%--        </form>--%>
         </div>
     </nav>
 
