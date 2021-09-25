@@ -44,8 +44,9 @@
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="${contextPath}/"><fmt:message key="main" /></a>
+                            <a class="dropdown-item" href="${contextPath}/login"><fmt:message key="login.title" /></a>
                             <a class="dropdown-item" href="${contextPath}/registration"><fmt:message key="registration" /></a>
+                            <a class="dropdown-item" href="${contextPath}/all-notes"><fmt:message key="notes.page" /></a>
                         </div>
                     </div>
                 </li>

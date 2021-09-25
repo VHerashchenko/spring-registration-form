@@ -22,7 +22,7 @@ public class RegFormServiceImpl implements RegFormService {
 
     @Override
     public void save(Note note) {
-        note.setPassword(bCryptPasswordEncoder.encode(note.getPassword()));
+//        note.setPassword(bCryptPasswordEncoder.encode(note.getPassword()));
         noteRepository.save(note);
     }
 
