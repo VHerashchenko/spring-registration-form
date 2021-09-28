@@ -1,7 +1,7 @@
 package com.vh.springregistrationform.controller;
 
-import com.vh.springregistrationform.dto.UserDTO;
-import com.vh.springregistrationform.entity.User;
+import com.vh.springregistrationform.model.dto.UserDTO;
+import com.vh.springregistrationform.model.entity.User;
 import com.vh.springregistrationform.service.SecurityService;
 import com.vh.springregistrationform.service.impl.RegFormServiceImpl;
 import com.vh.springregistrationform.validator.UserValidator;

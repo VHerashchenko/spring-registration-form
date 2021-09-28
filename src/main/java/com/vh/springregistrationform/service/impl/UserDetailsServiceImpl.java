@@ -1,6 +1,6 @@
 package com.vh.springregistrationform.service.impl;
 
-import com.vh.springregistrationform.entity.User;
+import com.vh.springregistrationform.model.entity.User;
 import com.vh.springregistrationform.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

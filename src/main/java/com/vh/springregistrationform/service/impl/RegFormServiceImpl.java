@@ -1,7 +1,7 @@
 package com.vh.springregistrationform.service.impl;
 
-import com.vh.springregistrationform.entity.User;
-import com.vh.springregistrationform.model.Role;
+import com.vh.springregistrationform.model.entity.User;
+import com.vh.springregistrationform.model.enums.Role;
 import com.vh.springregistrationform.repository.UserRepository;
 import com.vh.springregistrationform.service.RegFormService;
 import lombok.RequiredArgsConstructor;

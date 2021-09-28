@@ -1,6 +1,6 @@
-package com.vh.springregistrationform.dto;
+package com.vh.springregistrationform.model.dto;
 
-import com.vh.springregistrationform.model.Role;
+import com.vh.springregistrationform.model.enums.Role;
 import lombok.*;
 
 @Getter
