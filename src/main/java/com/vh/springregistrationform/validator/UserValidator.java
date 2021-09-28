@@ -1,7 +1,7 @@
 package com.vh.springregistrationform.validator;
 
-import com.vh.springregistrationform.dto.NoteDTO;
-import com.vh.springregistrationform.entity.Note;
+import com.vh.springregistrationform.dto.UserDTO;
+import com.vh.springregistrationform.entity.User;
 import com.vh.springregistrationform.service.RegFormService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,35 +12,35 @@ import org.springframework.validation.Validator;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class NoteValidator implements Validator {
+public class UserValidator implements Validator {
 
     private final RegFormService regFormService;
 
-    private static String USER_NAME_PARAMETER = "username";
+    private static final String USER_NAME_PARAMETER = "username";
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return Note.class.equals(aClass);
+        return User.class.equals(aClass);
     }
 
     @Override
     public void validate(Object o, Errors errors) {
-        NoteDTO noteDTO = (NoteDTO) o;
+        UserDTO userDTO = (UserDTO) o;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, USER_NAME_PARAMETER, "login.not.empty");
-        if (noteDTO.getUsername().length() < 6 || noteDTO.getUsername().length() > 32) {
+        if (userDTO.getUsername().length() < 6 || userDTO.getUsername().length() > 32) {
             errors.rejectValue(USER_NAME_PARAMETER, "size.username");
         }
-        if (regFormService.findByUsername(noteDTO.getUsername()) != null) {
+        if (regFormService.findByUsername(userDTO.getUsername()) != null) {
             errors.rejectValue(USER_NAME_PARAMETER, "duplicate.username");
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "login.not.empty");
-        if (noteDTO.getPassword().length() < 8 || noteDTO.getPassword().length() > 32) {
+        if (userDTO.getPassword().length() < 8 || userDTO.getPassword().length() > 32) {
             errors.rejectValue("password", "size.password");
         }
 
-        if (!noteDTO.getPasswordConfirm().equals(noteDTO.getPassword())) {
+        if (!userDTO.getPasswordConfirm().equals(userDTO.getPassword())) {
             errors.rejectValue("passwordConfirm", "different.password");
         }
 

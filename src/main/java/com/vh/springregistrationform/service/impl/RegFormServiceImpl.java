@@ -1,7 +1,8 @@
 package com.vh.springregistrationform.service.impl;
 
-import com.vh.springregistrationform.entity.Note;
-import com.vh.springregistrationform.repository.NoteRepository;
+import com.vh.springregistrationform.entity.User;
+import com.vh.springregistrationform.model.Role;
+import com.vh.springregistrationform.repository.UserRepository;
 import com.vh.springregistrationform.service.RegFormService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,23 +17,24 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RegFormServiceImpl implements RegFormService {
 
-    private final NoteRepository noteRepository;
+    private final UserRepository userRepository;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public void save(Note note) {
-//        note.setPassword(bCryptPasswordEncoder.encode(note.getPassword()));
-        noteRepository.save(note);
+    public void save(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setRole(Role.USER);
+        userRepository.save(user);
     }
 
     @Override
-    public Note findByUsername(String username) {
-        return noteRepository.findByUsername(username);
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     @Override
-    public List<Note> findAllNotes() {
-        return noteRepository.findAll();
+    public List<User> findAllNotes() {
+        return userRepository.findAll();
     }
 }

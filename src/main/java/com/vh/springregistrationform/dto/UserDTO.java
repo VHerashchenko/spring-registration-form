@@ -1,5 +1,6 @@
 package com.vh.springregistrationform.dto;
 
+import com.vh.springregistrationform.model.Role;
 import lombok.*;
 
 @Getter
@@ -8,11 +9,13 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @ToString
-public class NoteDTO {
+public class UserDTO {
 
     private String username;
 
     private String password;
 
     private String passwordConfirm;
+
+    private Role role;
 }

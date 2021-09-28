@@ -31,18 +31,8 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-                <div class="btn-group">
-                    <button type="button" class="btn"><fmt:message key="pages" /></button>
-                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="${contextPath}/login"><fmt:message key="login.title" /></a>
-                        <a class="dropdown-item" href="${contextPath}/registration"><fmt:message key="registration" /></a>
-                        <a class="dropdown-item" href="${contextPath}/all-notes"><fmt:message key="notes.page" /></a>
-                    </div>
-                </div>
+            <li class="nav-item active">
+                <a class="nav-link" href="${contextPath}/all-notes"><fmt:message key="notes.page" /> <span class="sr-only"></span></a>
             </li>
             <li class="nav-item dropdown">
                 <div class="btn-group">
@@ -60,6 +50,10 @@
                 <a class="nav-link" href="${contextPath}/welcome"><fmt:message key="welcome" /> <span class="sr-only"></span></a>
             </li>
         </ul>
+        <form id="logoutForm" method="POST" action="${contextPath}/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <a onclick="document.forms['logoutForm'].submit()"><fmt:message key="logout"/></a>
+        </form>
     </div>
 </nav>
 
@@ -71,6 +65,7 @@
                 <tr>
                     <th><fmt:message key="username"/></th>
                     <th><fmt:message key="password"/></th>
+                    <th><fmt:message key="role"/></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -78,6 +73,7 @@
                     <tr>
                         <td>${notes.username}</td>
                         <td>${notes.password}</td>
+                        <td>${notes.role}</td>
                     </tr>
                 </c:forEach>
                 </tbody>

@@ -1,13 +1,13 @@
 package com.vh.springregistrationform.service;
 
-import com.vh.springregistrationform.entity.Note;
+import com.vh.springregistrationform.entity.User;
 
 import java.util.List;
 
 public interface RegFormService {
-    void save(Note note);
+    void save(User note);
 
-    Note findByUsername(String username);
+    User findByUsername(String username);
 
-    List<Note> findAllNotes();
+    List<User> findAllNotes();
 }

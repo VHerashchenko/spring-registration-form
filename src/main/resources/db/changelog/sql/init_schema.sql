@@ -1,5 +1,8 @@
-CREATE TABLE vh_note(
+DROP TABLE vh_user;
+
+CREATE TABLE vh_user(
     id SERIAL PRIMARY KEY,
-    username VARCHAR(100) NOT NULL,
-    password VARCHAR(100) NOT NULL
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL,
+    role VARCHAR(20)
 );

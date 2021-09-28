@@ -1,9 +1,10 @@
 package com.vh.springregistrationform.controller;
 
-import com.vh.springregistrationform.dto.NoteDTO;
-import com.vh.springregistrationform.entity.Note;
+import com.vh.springregistrationform.dto.UserDTO;
+import com.vh.springregistrationform.entity.User;
+import com.vh.springregistrationform.service.SecurityService;
 import com.vh.springregistrationform.service.impl.RegFormServiceImpl;
-import com.vh.springregistrationform.validator.NoteValidator;
+import com.vh.springregistrationform.validator.UserValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -25,9 +26,11 @@ public class RegFormController {
 
     private final RegFormServiceImpl regFormService;
 
-    private final NoteValidator noteValidator;
+    private final UserValidator noteValidator;
 
     private final ModelMapper mapper;
+
+    private final SecurityService securityService;
 
     @RequestMapping("/welcome")
     public String welcome() {
@@ -41,22 +44,24 @@ public class RegFormController {
 
     @GetMapping("/registration")
     public String registration(Model model) {
-        model.addAttribute("noteForm", new NoteDTO());
+        model.addAttribute("noteForm", new UserDTO());
 
         return "registration/registration";
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("noteForm") NoteDTO noteForm, BindingResult bindingResult) {
-        noteValidator.validate(noteForm, bindingResult);
+    public String registration(@ModelAttribute("noteForm") UserDTO userForm, BindingResult bindingResult) {
+        noteValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "user/registration";
+            return "registration/registration";
         }
 
-        Note note = mapper.map(noteForm, Note.class);
+        User user = mapper.map(userForm, User.class);
 
-        regFormService.save(note);
+        regFormService.save(user);
+
+        securityService.autoLogin(user.getUsername(), user.getPasswordConfirm());
 
         return "redirect:/welcome";
     }
@@ -77,9 +82,9 @@ public class RegFormController {
 
         log.debug("findAllNotes");
 
-        List<Note> notes = regFormService.findAllNotes();
+        List<User> notes = regFormService.findAllNotes();
 
-        model.addAttribute("notes", mapper.map(notes, (new TypeToken<List<NoteDTO>>(){}).getType()));
+        model.addAttribute("notes", mapper.map(notes, (new TypeToken<List<UserDTO>>(){}).getType()));
 
         return "allNotes";
     }

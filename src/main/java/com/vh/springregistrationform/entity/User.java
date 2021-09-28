@@ -1,5 +1,6 @@
 package com.vh.springregistrationform.entity;
 
+import com.vh.springregistrationform.model.Role;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,8 +12,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @ToString
-@Table(name = "vh_note")
-public class Note {
+@Table(name = "vh_user")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +23,10 @@ public class Note {
     private String username;
 
     private String password;
+
+    @Column(name = "role")
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
     @Transient
     private String passwordConfirm;

@@ -50,12 +50,11 @@
         <h2 class="form-heading"><fmt:message key="login.title"/></h2>
 
         <div class="form-group ${error != null ? 'has-error' : ''}">
+            <% if(null != request.getAttribute("message")){ %>
+            <span><fmt:message key="${message}"/></span>
+            <%} %>
             <div><fmt:message key="username"/>
                 <input name="username" type="text" class="form-control" autofocus="true"/>
-                <% if(null != request.getAttribute("message")){ %>
-                <span><fmt:message key="${message}"/></span>
-                <%} %>
-
             </div>
 
             <div><fmt:message key="password"/>
