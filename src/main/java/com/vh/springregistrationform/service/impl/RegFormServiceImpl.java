@@ -34,6 +34,11 @@ public class RegFormServiceImpl implements RegFormService {
     }
 
     @Override
+    public void deleteById(Integer id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
     public List<User> findAllNotes() {
         return userRepository.findAll();
     }

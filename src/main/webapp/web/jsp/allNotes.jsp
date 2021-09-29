@@ -66,6 +66,7 @@
                     <th><fmt:message key="username"/></th>
                     <th><fmt:message key="password"/></th>
                     <th><fmt:message key="role"/></th>
+                    <th><fmt:message key="actions"/></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -74,6 +75,12 @@
                         <td>${notes.username}</td>
                         <td>${notes.password}</td>
                         <td>${notes.role}</td>
+                        <td>
+                            <form:form method="DELETE" action="${contextPath}/all-notes/${notes.id}"
+                                   class="form-signin">
+                            <button class="btn btn btn-danger btn-block" type="submit"><fmt:message key="delete"/></button>
+                            </form:form>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>

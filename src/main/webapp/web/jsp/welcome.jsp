@@ -64,7 +64,7 @@
 </nav>
 
 <div class="container" style="margin-top: 70px">
-    <h1><fmt:message key="welcome.message" /></h1>
+    <h1><fmt:message key="welcome.message" /> ${pageContext.request.userPrincipal.name}</h1>
 </div>
 
 </body>

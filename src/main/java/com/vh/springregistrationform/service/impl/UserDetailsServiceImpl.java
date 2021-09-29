@@ -3,7 +3,6 @@ package com.vh.springregistrationform.service.impl;
 import com.vh.springregistrationform.entity.User;
 import com.vh.springregistrationform.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -28,8 +27,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = userRepository.findByUsername(username);
         if (user == null) throw new UsernameNotFoundException(username);
 
-        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getUsername());
+        Set<SimpleGrantedAuthority> grantedAuthority = user.getRole().getAuthorities();
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), List.of(grantedAuthority));
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthority);
     }
 }

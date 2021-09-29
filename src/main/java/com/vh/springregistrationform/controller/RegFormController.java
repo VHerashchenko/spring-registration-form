@@ -12,6 +12,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -78,6 +79,7 @@ public class RegFormController {
     }
 
     @GetMapping("/all-notes")
+    @PreAuthorize("hasAnyAuthority('read', 'write')")
     public String getAllNotes(Model model){
 
         log.debug("findAllNotes");
@@ -87,6 +89,14 @@ public class RegFormController {
         model.addAttribute("notes", mapper.map(notes, (new TypeToken<List<UserDTO>>(){}).getType()));
 
         return "allNotes";
+    }
+
+    @DeleteMapping("/all-notes/{id}")
+    @PreAuthorize("hasAuthority('write')")
+    public String deleteById(@PathVariable Integer id){
+        regFormService.deleteById(id);
+
+        return "redirect:/all-notes";
     }
 
     @ExceptionHandler(RuntimeException.class)

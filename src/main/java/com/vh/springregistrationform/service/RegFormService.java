@@ -9,5 +9,7 @@ public interface RegFormService {
 
     User findByUsername(String username);
 
+    void deleteById(Integer id);
+
     List<User> findAllNotes();
 }
