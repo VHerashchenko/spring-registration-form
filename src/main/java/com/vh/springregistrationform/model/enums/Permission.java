@@ -1,4 +1,4 @@
-package com.vh.springregistrationform.model;
+package com.vh.springregistrationform.model.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

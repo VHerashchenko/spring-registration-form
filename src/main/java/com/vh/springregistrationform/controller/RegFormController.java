@@ -1,24 +1,30 @@
 package com.vh.springregistrationform.controller;
 
-import com.vh.springregistrationform.dto.UserDTO;
-import com.vh.springregistrationform.entity.User;
+import com.vh.springregistrationform.model.dto.UserDTO;
+import com.vh.springregistrationform.model.entity.User;
+import com.vh.springregistrationform.model.enums.Permission;
 import com.vh.springregistrationform.service.SecurityService;
 import com.vh.springregistrationform.service.impl.RegFormServiceImpl;
+import com.vh.springregistrationform.validator.RoleValidator;
 import com.vh.springregistrationform.validator.UserValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.beans.PropertyEditor;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -32,6 +38,8 @@ public class RegFormController {
     private final ModelMapper mapper;
 
     private final SecurityService securityService;
+
+    private final RoleValidator roleValidator;
 
     @RequestMapping("/welcome")
     public String welcome() {
@@ -92,8 +100,14 @@ public class RegFormController {
     }
 
     @DeleteMapping("/all-notes/{id}")
-    @PreAuthorize("hasAuthority('write')")
     public String deleteById(@PathVariable Integer id){
+        BindingResult bindingResult = new MapBindingResult(new HashMap<>(), "role");
+        roleValidator.validate(Permission.WRITE.name(), bindingResult);
+
+        if (bindingResult.hasErrors()){
+            return "redirect:/all-notes";
+        }
+
         regFormService.deleteById(id);
 
         return "redirect:/all-notes";

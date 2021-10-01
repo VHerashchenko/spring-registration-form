@@ -1,6 +1,6 @@
-package com.vh.springregistrationform.entity;
+package com.vh.springregistrationform.model.entity;
 
-import com.vh.springregistrationform.model.Role;
+import com.vh.springregistrationform.model.enums.Role;
 import lombok.*;
 
 import javax.persistence.*;

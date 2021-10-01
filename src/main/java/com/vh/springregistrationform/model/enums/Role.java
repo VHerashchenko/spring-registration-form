@@ -1,5 +1,6 @@
-package com.vh.springregistrationform.model;
+package com.vh.springregistrationform.model.enums;
 
+import com.vh.springregistrationform.model.enums.Permission;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

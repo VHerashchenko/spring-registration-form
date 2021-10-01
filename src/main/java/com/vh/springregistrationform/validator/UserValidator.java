@@ -1,7 +1,7 @@
 package com.vh.springregistrationform.validator;
 
-import com.vh.springregistrationform.dto.UserDTO;
-import com.vh.springregistrationform.entity.User;
+import com.vh.springregistrationform.model.dto.UserDTO;
+import com.vh.springregistrationform.model.entity.User;
 import com.vh.springregistrationform.service.RegFormService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

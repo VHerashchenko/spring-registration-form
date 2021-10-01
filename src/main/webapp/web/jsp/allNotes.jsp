@@ -89,6 +89,13 @@
     </div>
 </div>
 
+<div class="container">
+    <spring:hasBindErrors name="role">
+            <b><fmt:message key="error.message.role"/></b>
+            <br/>
+    </spring:hasBindErrors>
+</div>
+
 <script src="${contextPath}/resources/js/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.js"></script>
 </body>

@@ -1,6 +1,6 @@
 package com.vh.springregistrationform.service;
 
-import com.vh.springregistrationform.entity.User;
+import com.vh.springregistrationform.model.entity.User;
 
 import java.util.List;
 
