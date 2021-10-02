@@ -90,10 +90,11 @@
 </div>
 
 <div class="container">
-    <spring:hasBindErrors name="role">
-            <b><fmt:message key="error.message.role"/></b>
-            <br/>
-    </spring:hasBindErrors>
+    <% if(null != request.getAttribute("errorMessage")){ %>
+        <div class="form-group has-error">
+            <span><fmt:message key="${errorMessage}"/></span>
+        </div>
+    <%} %>
 </div>
 
 <script src="${contextPath}/resources/js/jquery.min.js"></script>

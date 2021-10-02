@@ -24,7 +24,7 @@ public class RoleValidator implements Validator {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         boolean hasUserRole = authentication.getAuthorities().stream()
-                .anyMatch(r -> r.getAuthority().equals(str));
+                .anyMatch(r -> r.getAuthority().equalsIgnoreCase(str));
 
         if (!hasUserRole) {
             errors.rejectValue(ROLE_NAME, "error.message.role");

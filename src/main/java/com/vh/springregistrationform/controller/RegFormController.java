@@ -11,20 +11,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.MapBindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.beans.PropertyEditor;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Controller
@@ -105,12 +103,20 @@ public class RegFormController {
         roleValidator.validate(Permission.WRITE.name(), bindingResult);
 
         if (bindingResult.hasErrors()){
-            return "redirect:/all-notes";
+            return "redirect:/all-notes/error";
         }
 
         regFormService.deleteById(id);
 
         return "redirect:/all-notes";
+    }
+
+    @GetMapping("/all-notes/error")
+    @PreAuthorize("hasAnyAuthority('read', 'write')")
+    public String deleteFailed(Model model){
+        model.addAttribute("errorMessage", "error.message.role");
+
+        return getAllNotes(model);
     }
 
     @ExceptionHandler(RuntimeException.class)
